@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class UserSettings extends Model
 {
     protected $fillable = [
+        'user_id',
         'search_age_from',
         'search_age_to',
         'search_male',

@@ -9,6 +9,7 @@ use App\User;
 use App\UserInfo;
 use App\UserSettings;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -33,7 +34,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/profile';
 
     /**
      * Create a new controller instance.
@@ -80,11 +81,13 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password'])
         ]);
 
-        $userInfo = UserInfo::create([
+        UserInfo::create([
+            'user_id' => $user->id,
             'name' => $data['name'],
             'surname' => $data['surname'],
             'age' => $data['age'],
             'gender' => $data['gender'],
+            'profile_picture' => '',
             'description' => $data['description']
         ]);
 
@@ -93,7 +96,8 @@ class RegisterController extends Controller
         (isset($data['search_male'])) ? $searchMale = 1 : $searchMale = 0;
         (isset($data['search_female'])) ? $searchFemale = 1 : $searchFemale = 0;
 
-        $userSettings = UserSettings::create([
+        UserSettings::create([
+            'user_id' => $user->id,
             'search_age_from' => $searchAgeRange[0],
             'search_age_to' => $searchAgeRange[1],
             'search_male' => $searchMale,

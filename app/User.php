@@ -33,14 +33,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getPicture()
+    public function profile()
     {
-        if($this->profile_picture == null)
-        {
-            return Storage::url('/picture/default.png');
-        }
-
-        return Storage::url($this->profile_picture);
+        return $this->hasOne(Profile::class);
     }
 
     public function info()

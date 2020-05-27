@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CompleteUserProfileRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class UpdateUserProfileController extends Controller
 {
-    public function __invoke(Request $request)
+    public function __invoke(CompleteUserProfileRequest $request)
     {
-        /** @var User $user */
         $user = auth()->user();
+        $userInfo = $user->info;
 
         //Storage::get($user->profile_picture);
-        Storage::disk('public')->delete($user->profile_picture);
+        Storage::disk('public')->delete($userInfo->profile_picture);
 
-        $user->update([
-            'name' => $request->get('name'),
+        $userInfo->update([
             'profile_picture' => $request->file('picture')->store('profilePictures', 'public')
         ]);
 

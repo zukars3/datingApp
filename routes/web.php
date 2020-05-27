@@ -25,10 +25,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile', 'EditUserProfileController');
 Route::put('/profile', 'UpdateUserProfileController')->name('profile.update');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::get('/test', function () {
     \App\Jobs\ExampleJob::dispatch(100);
 });

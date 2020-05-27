@@ -125,6 +125,12 @@
                                         <label class="form-check-label" for="female">Female</label>
                                     </div>
 
+                                    @error('gender')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+
                                 </div>
                             </div>
 
@@ -134,8 +140,15 @@
 
                                 <div class="col-md-6">
                                     <textarea class="form-control" id="description" name="description" rows="3"
-                                              style="resize:none;"></textarea>
+                                              style="resize:none;" value="{{ old('description') }}" required autocomplete="description"></textarea>
                                 </div>
+
+                                @error('description')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
                             </div>
 
                             <hr>

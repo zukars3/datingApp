@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Edit profile</div>
+                    <div class="card-header">Complete your profile <br>(you wont be able to see others while you dont complete your profile)</div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -14,23 +14,27 @@
                             </div>
                         @endif
 
-                        {{ $user->name }}
+                        <form method='post' action="{{ route('profile.update') }}" enctype="multipart/form-data">
+                            @csrf
+                            @method('put')
 
-                        <img src="{{ $user->getPicture() }}" width="300px">
+                            <div class="form-group row">
+                                <label for="picture"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Select your profile picture:') }}</label>
+                                <div class="col-md-6">
+                                    <input class="form-control-file" type="file" id="picture" name="picture">
+                                    <img src="{{ $userInfo->getPicture() }}" width="300px">
+                                    @error('picture')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
 
-                        <div class="form-group">
-                            <form method="post" action="{{ route('profile.update') }}" enctype="multipart/form-data">
-                                @csrf
-                                @method('put')
-                                <label for="name">Name:</label><br>
-                                <input class="form-control" type="text" id="name" name="name"
-                                       value="{{ old('name', $user->name) }}"><br>
-                                <label for="picture">Select a profile picture:</label><br>
-                                <input class="form-control-file" type="file" id="picture" name="picture">
-                                <br>
-                                <button type="submit" class="btn btn-primary">Update</button>
-                            </form>
-                        </div>
+                            <button type="submit" class="btn btn-primary">Update</button>
+
+                        </form>
 
                     </div>
                 </div>

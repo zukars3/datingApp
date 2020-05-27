@@ -15,6 +15,7 @@ class CreateUserSettingsTable extends Migration
     {
         Schema::create('user_settings', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('user_id');
             $table->integer('search_age_from');
             $table->integer('search_age_to');
             $table->string('search_male')->nullable();
