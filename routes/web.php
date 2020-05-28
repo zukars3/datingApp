@@ -22,7 +22,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/profile', 'EditUserProfileController');
+Route::get('/profile', 'EditUserProfileController')->name('profile');
 Route::put('/profile', 'UpdateUserProfileController')->name('profile.update');
 
 Route::get('/test', function () {

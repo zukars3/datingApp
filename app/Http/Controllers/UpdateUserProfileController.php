@@ -12,12 +12,23 @@ class UpdateUserProfileController extends Controller
     {
         $user = auth()->user();
         $userInfo = $user->info;
+        $userSettings = $user->settings;
 
-        //Storage::get($user->profile_picture);
-        Storage::disk('public')->delete($userInfo->profile_picture);
+        if($request->hasFile('picture')){
+            Storage::disk('public')->delete($userInfo->profile_picture);
 
-        $userInfo->update([
-            'profile_picture' => $request->file('picture')->store('profilePictures', 'public')
+            $userInfo->update([
+                'profile_picture' => $request->file('picture')->store('profilePictures', 'public')
+            ]);
+        }
+
+        $searchAgeRange = explode(';', $request->get('search_age_range'));
+
+        $userSettings->update([
+            'search_age_from' => $searchAgeRange[0],
+            'search_age_to' => $searchAgeRange[1],
+            'search_male' => $request->get('search_male'),
+            'search_female' => $request->get('search_female')
         ]);
 
         return redirect()

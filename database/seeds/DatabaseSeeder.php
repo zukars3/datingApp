@@ -1,5 +1,8 @@
 <?php
 
+use App\User;
+use App\UserInfo;
+use App\UserSettings;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,6 +14,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UserSeeder::class);
+        factory(User::class, 10)->create()->each(function ($user) {
+            // Seed the relation with one address
+            $userInfo = factory(UserInfo::class)->make();
+            $user->info()->save($userInfo);
+
+            // Seed the relation with 5 purchases
+            $userSettings = factory(UserSettings::class)->make();
+            $user->settings()->save($userSettings);
+        });
     }
 }
