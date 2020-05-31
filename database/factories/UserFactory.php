@@ -2,6 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\Match;
 use App\User;
 use App\UserInfo;
 use App\UserSettings;
@@ -29,13 +30,43 @@ $factory->define(User::class, function (Faker $faker) {
 });
 
 $factory->define(UserInfo::class, function (Faker $faker) {
+    $gender = $faker->randomElement(['male', 'female']);
+
+    if($gender == 'male') {
+        $pictures = [
+            'picture/male/male1.jpeg',
+            'picture/male/male2.jpeg',
+            'picture/male/male3.jpeg',
+            'picture/male/male4.jpeg',
+            'picture/male/male5.jpeg',
+            'picture/male/male6.jpeg',
+            'picture/male/male7.jpeg',
+            'picture/male/male8.jpeg',
+            'picture/male/male9.jpeg',
+            'picture/male/male10.jpeg'
+        ];
+    } else {
+        $pictures = [
+            'picture/female/female1.jpeg',
+            'picture/female/female2.jpeg',
+            'picture/female/female3.jpeg',
+            'picture/female/female4.jpeg',
+            'picture/female/female5.jpeg',
+            'picture/female/female6.jpeg',
+            'picture/female/female7.jpeg',
+            'picture/female/female8.jpeg',
+            'picture/female/female9.jpeg',
+            'picture/female/female10.jpeg'
+        ];
+    }
+
     return [
         'name' => $faker->firstName,
         'surname' => $faker->lastName,
         'age' => $faker->numberBetween(18, 100),
-        'gender' => $faker->randomElement(['male', 'female']),
-        'profile_picture' => 'picture/default.png',
-        'description' => $faker->paragraph
+        'gender' => $gender,
+        'profile_picture' => $faker->randomElement($pictures),
+        'description' => $faker->paragraph(1)
     ];
 });
 

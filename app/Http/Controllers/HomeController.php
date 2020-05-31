@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use App\UserInfo;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,43 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user = auth()->user();
+        $userSettings = $user->settings;
+
+        if ($userSettings->search_female == 1 && $userSettings->search_male == 1) {
+            $users = User::whereHas('info', function ($query) use ($userSettings) {
+                $query->where('age', '>=', $userSettings->search_age_from)
+                    ->where('age', '<=', $userSettings->search_age_to)
+                    ->where('user_id', '!=', $userSettings->user_id);
+            })
+                ->doesnthave('matches')
+                ->doesnthave('dislikes')
+                ->paginate(1);
+        } elseif ($userSettings->search_female == 1) {
+            $users = User::whereHas('info', function ($query) use ($userSettings) {
+                $query->where('age', '>=', $userSettings->search_age_from)
+                    ->where('age', '<=', $userSettings->search_age_to)
+                    ->where('gender', 'female')
+                    ->where('user_id', '!=', $userSettings->user_id);
+            })
+                ->doesnthave('matches')
+                ->doesnthave('dislikes')
+                ->paginate(1);
+        } elseif ($userSettings->search_male == 1) {
+            $users = User::whereHas('info', function ($query) use ($userSettings) {
+                $query->where('age', '>=', $userSettings->search_age_from)
+                    ->where('age', '<=', $userSettings->search_age_to)
+                    ->where('gender', 'male')
+                    ->where('user_id', '!=', $userSettings->user_id);
+            })
+                ->doesnthave('matches')
+                ->doesnthave('dislikes')
+                ->paginate(1);
+        }
+
+        return view('home', [
+            'users' => $users,
+            'user' => $user,
+        ]);
     }
 }

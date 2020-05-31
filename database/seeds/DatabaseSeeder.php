@@ -1,9 +1,12 @@
 <?php
 
+use App\Match;
 use App\User;
+use Illuminate\Support\Facades\DB;
 use App\UserInfo;
 use App\UserSettings;
 use Illuminate\Database\Seeder;
+use Faker\Generator as Faker;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,16 +15,24 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(Faker $faker)
     {
-        factory(User::class, 10)->create()->each(function ($user) {
-            // Seed the relation with one address
+        factory(User::class, 100)->create()->each(function ($user) {
             $userInfo = factory(UserInfo::class)->make();
             $user->info()->save($userInfo);
 
-            // Seed the relation with 5 purchases
             $userSettings = factory(UserSettings::class)->make();
             $user->settings()->save($userSettings);
         });
+
+        $usersCount = User::all()->count();
+
+        for ($i = 0; $i < 100; $i++) {
+            DB::table('matches')->insert([
+                'user_one' => $faker->numberBetween(1, $usersCount),
+                'user_two' => $faker->numberBetween(1, $usersCount),
+                'matched' => 1
+            ]);
+        }
     }
 }

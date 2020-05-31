@@ -7,11 +7,14 @@
 
 
 @section('content')
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Complete your profile <br>(you wont be able to see others while you dont complete your profile)</div>
+                    <div class="card-header">Complete your profile <br>(you wont be able to see others while you dont
+                        complete your profile)
+                    </div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -38,48 +41,49 @@
                                 </div>
                             </div>
 
-                                <div class="form-group row">
-                                    <label for="search_age_range"
-                                           class="col-md-4 col-form-label text-md-right">{{ __('I am looking for') }}</label>
+                            <div class="form-group row">
+                                <label for="search_age_range"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('I am looking for') }}</label>
 
-                                    <div class="col-md-6">
-                                        <input type="text" class="js-range-slider" name="search_age_range" id="search_age_range"
-                                               value=""
-                                               data-type="double"
-                                               data-min="18"
-                                               data-max="100"
-                                               data-from="{{ $userSettings->search_age_from }}"
-                                               data-to="{{ $userSettings->search_age_to }}"
-                                        />
-                                    </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="js-range-slider" name="search_age_range"
+                                           id="search_age_range"
+                                           value=""
+                                           data-type="double"
+                                           data-min="18"
+                                           data-max="100"
+                                           data-from="{{ $userSettings->search_age_from }}"
+                                           data-to="{{ $userSettings->search_age_to }}"
+                                    />
                                 </div>
+                            </div>
 
-                                <div class="form-group row">
-                                    <label for="genderMale"
-                                           class="col-md-4 col-form-label text-md-right">{{ __('I am looking for') }}</label>
+                            <div class="form-group row">
+                                <label for="genderMale"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('I am looking for') }}</label>
 
-                                    <div class="col-md-6">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" name="search_male"
-                                                   id="search_male" value="1"
-                                                   @if($userSettings->search_male == 1)
-                                                   checked
-                                                @endif>
-                                            <label class="form-check-label" for="search_male">Male</label>
-                                        </div>
-
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" name="search_female"
-                                                   id="search_female" value="1"
-                                                   @if($userSettings->search_female == 1)
-                                                       checked
-                                                   @endif
-                                                   >
-                                            <label class="form-check-label" for="search_female">Female</label>
-                                        </div>
-
+                                <div class="col-md-6">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" name="search_male"
+                                               id="search_male" value="1"
+                                               @if($userSettings->search_male == 1)
+                                               checked
+                                            @endif>
+                                        <label class="form-check-label" for="search_male">Male</label>
                                     </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" name="search_female"
+                                               id="search_female" value="1"
+                                               @if($userSettings->search_female == 1)
+                                               checked
+                                            @endif
+                                        >
+                                        <label class="form-check-label" for="search_female">Female</label>
+                                    </div>
+
                                 </div>
+                            </div>
 
                             <button type="submit" class="btn btn-primary">Update</button>
 
