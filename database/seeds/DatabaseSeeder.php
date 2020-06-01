@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        factory(User::class, 100)->create()->each(function ($user) {
+        factory(User::class, 500)->create()->each(function ($user) {
             $userInfo = factory(UserInfo::class)->make();
             $user->info()->save($userInfo);
 
@@ -27,11 +27,10 @@ class DatabaseSeeder extends Seeder
 
         $usersCount = User::all()->count();
 
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 500; $i++) {
             DB::table('matches')->insert([
                 'user_one' => $faker->numberBetween(1, $usersCount),
-                'user_two' => $faker->numberBetween(1, $usersCount),
-                'matched' => 1
+                'user_two' => $faker->numberBetween(1, $usersCount)
             ]);
         }
     }

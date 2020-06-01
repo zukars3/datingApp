@@ -34,8 +34,12 @@ class HomeController extends Controller
                     ->where('age', '<=', $userSettings->search_age_to)
                     ->where('user_id', '!=', $userSettings->user_id);
             })
-                ->doesnthave('matches')
-                ->doesnthave('dislikes')
+                ->whereDoesntHave('userLiked', function ($query) use ($user) {
+                    $query->where('user_one', $user->id);
+                })
+                ->whereDoesntHave('dislikes', function ($query) use ($user) {
+                    $query->where('user_one', $user->id);
+                })
                 ->paginate(1);
         } elseif ($userSettings->search_female == 1) {
             $users = User::whereHas('info', function ($query) use ($userSettings) {
@@ -44,8 +48,12 @@ class HomeController extends Controller
                     ->where('gender', 'female')
                     ->where('user_id', '!=', $userSettings->user_id);
             })
-                ->doesnthave('matches')
-                ->doesnthave('dislikes')
+                ->whereDoesntHave('userLiked', function ($query) use ($user) {
+                    $query->where('user_one', $user->id);
+                })
+                ->whereDoesntHave('dislikes', function ($query) use ($user) {
+                    $query->where('user_one', $user->id);
+                })
                 ->paginate(1);
         } elseif ($userSettings->search_male == 1) {
             $users = User::whereHas('info', function ($query) use ($userSettings) {
@@ -54,8 +62,12 @@ class HomeController extends Controller
                     ->where('gender', 'male')
                     ->where('user_id', '!=', $userSettings->user_id);
             })
-                ->doesnthave('matches')
-                ->doesnthave('dislikes')
+                ->whereDoesntHave('userLiked', function ($query) use ($user) {
+                    $query->where('user_one', $user->id);
+                })
+                ->whereDoesntHave('dislikes', function ($query) use ($user) {
+                    $query->where('user_one', $user->id);
+                })
                 ->paginate(1);
         }
 

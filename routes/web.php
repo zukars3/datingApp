@@ -24,6 +24,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/profile', 'EditUserProfileController')->name('profile');
 Route::get('/user/{id}', 'UserController@show')->name('user.show');
+Route::get('/matches', 'MatchesController@matches')->name('matches');
+Route::get('/likes', 'MatchesController@likes')->name('likes');
 Route::put('/profile', 'UpdateUserProfileController')->name('profile.update');
 Route::post('/profile/like/{id}', 'LikeController@like')->name('like');
 Route::post('/profile/dislike/{id}', 'LikeController@dislike')->name('dislike');

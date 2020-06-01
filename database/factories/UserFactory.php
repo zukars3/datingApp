@@ -56,7 +56,22 @@ $factory->define(UserInfo::class, function (Faker $faker) {
             'picture/female/female7.jpeg',
             'picture/female/female8.jpeg',
             'picture/female/female9.jpeg',
-            'picture/female/female10.jpeg'
+            'picture/female/female10.jpeg',
+            'picture/female/pic01.jpg',
+            'picture/female/pic02.jpg',
+            'picture/female/pic03.jpg',
+            'picture/female/pic04.jpg',
+            'picture/female/pic05.jpg',
+            'picture/female/pic06.jpg',
+            'picture/female/pic07.jpg',
+            'picture/female/pic08.jpg',
+            'picture/female/pic09.jpg',
+            'picture/female/pic10.jpg',
+            'picture/female/pic11.jpg',
+            'picture/female/pic13.jpg',
+            'picture/female/pic14.jpg',
+            'picture/female/pic15.jpg',
+            'picture/female/pic16.jpg'
         ];
     }
 
@@ -66,7 +81,7 @@ $factory->define(UserInfo::class, function (Faker $faker) {
         'age' => $faker->numberBetween(18, 100),
         'gender' => $gender,
         'profile_picture' => $faker->randomElement($pictures),
-        'description' => $faker->paragraph(1)
+        'description' => $faker->paragraph(2)
     ];
 });
 

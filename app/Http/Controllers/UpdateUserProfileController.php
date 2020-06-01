@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CompleteUserProfileRequest;
+use App\Http\Requests\UpdateUserProfileRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class UpdateUserProfileController extends Controller
 {
-    public function __invoke(CompleteUserProfileRequest $request)
+    public function __invoke(UpdateUserProfileRequest $request)
     {
         $user = auth()->user();
         $userInfo = $user->info;

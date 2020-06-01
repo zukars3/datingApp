@@ -12,9 +12,17 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Complete your profile <br>(you wont be able to see others while you dont
-                        complete your profile)
-                    </div>
+                    @if($user->info->profile_picture == null)
+                        <div class="card-header">
+                            Complete your profile
+                            <br>
+                            (you wont be able to see others while you dont complete your profile)
+                        </div>
+                    @else
+                        <div class="card-header">
+                            Edit your profile
+                        </div>
+                    @endif
 
                     <div class="card-body">
                         @if (session('status'))
@@ -32,7 +40,7 @@
                                        class="col-md-4 col-form-label text-md-right">{{ __('Select your profile picture:') }}</label>
                                 <div class="col-md-6">
                                     <input class="form-control-file" type="file" id="picture" name="picture">
-                                    <img src="{{ $userInfo->getPicture() }}" width="300px">
+                                    <img src="{{ $userInfo->getPicture() }}" width="300px" alt="Your profile picture">
                                     @error('picture')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
