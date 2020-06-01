@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use Illuminate\Http\Request;
 
 class MatchesController extends Controller
 {
@@ -16,21 +15,15 @@ class MatchesController extends Controller
     {
         $user = auth()->user();
         $userSettings = $user->settings;
+        $id = $user->id;
 
-        $users = User::whereHas('info', function ($query) use ($userSettings) {
-            $query->where('age', '>=', $userSettings->search_age_from)
-                ->where('age', '<=', $userSettings->search_age_to)
-                ->where('user_id', '!=', $userSettings->user_id);
-        })
-            ->whereHas('userLiked', function ($query) use ($user) {
-                $query->where('user_one', $user->id);
-            })
-            ->whereHas('likedUser', function ($query) use ($user) {
-                $query->where('user_two', $user->id);
-            })
-            ->whereDoesntHave('dislikes', function ($query) use ($user) {
-                $query->where('user_one', $user->id);
-            })
+        $users = User::searchWithSettings(
+            $userSettings->search_age_from,
+            $userSettings->search_age_to,
+            'both',
+            $userSettings->user_id
+        )
+            ->searchMatches($id)
             ->get();
 
         return view('matches', [
@@ -43,18 +36,15 @@ class MatchesController extends Controller
     {
         $user = auth()->user();
         $userSettings = $user->settings;
+        $id = $user->id;
 
-        $users = User::whereHas('info', function ($query) use ($userSettings) {
-            $query->where('age', '>=', $userSettings->search_age_from)
-                ->where('age', '<=', $userSettings->search_age_to)
-                ->where('user_id', '!=', $userSettings->user_id);
-        })
-            ->whereHas('userLiked', function ($query) use ($user) {
-                $query->where('user_one', $user->id);
-            })
-            ->whereDoesntHave('dislikes', function ($query) use ($user) {
-                $query->where('user_one', $user->id);
-            })
+        $users = User::searchWithSettings(
+            $userSettings->search_age_from,
+            $userSettings->search_age_to,
+            'both',
+            $userSettings->user_id
+        )
+            ->searchLikes($id)
             ->get();
 
         return view('likes', [

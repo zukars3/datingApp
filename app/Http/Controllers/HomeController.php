@@ -27,52 +27,39 @@ class HomeController extends Controller
     {
         $user = auth()->user();
         $userSettings = $user->settings;
+        $id = $user->id;
 
         if ($userSettings->search_female == 1 && $userSettings->search_male == 1) {
-            $users = User::whereHas('info', function ($query) use ($userSettings) {
-                $query->where('age', '>=', $userSettings->search_age_from)
-                    ->where('age', '<=', $userSettings->search_age_to)
-                    ->where('user_id', '!=', $userSettings->user_id);
-            })
-                ->whereDoesntHave('userLiked', function ($query) use ($user) {
-                    $query->where('user_one', $user->id);
-                })
-                ->whereDoesntHave('dislikes', function ($query) use ($user) {
-                    $query->where('user_one', $user->id);
-                })
-                ->paginate(1);
+            $users = User::searchWithSettings(
+                $userSettings->search_age_from,
+                $userSettings->search_age_to,
+                'both',
+                $userSettings->user_id
+            )
+                ->searchWithoutLikesAndDislikes($id)
+                ->first();
         } elseif ($userSettings->search_female == 1) {
-            $users = User::whereHas('info', function ($query) use ($userSettings) {
-                $query->where('age', '>=', $userSettings->search_age_from)
-                    ->where('age', '<=', $userSettings->search_age_to)
-                    ->where('gender', 'female')
-                    ->where('user_id', '!=', $userSettings->user_id);
-            })
-                ->whereDoesntHave('userLiked', function ($query) use ($user) {
-                    $query->where('user_one', $user->id);
-                })
-                ->whereDoesntHave('dislikes', function ($query) use ($user) {
-                    $query->where('user_one', $user->id);
-                })
-                ->paginate(1);
+            $users = User::searchWithSettings(
+                $userSettings->search_age_from,
+                $userSettings->search_age_to,
+                'female',
+                $userSettings->user_id
+            )
+                ->searchWithoutLikesAndDislikes($id)
+                ->first();
         } elseif ($userSettings->search_male == 1) {
-            $users = User::whereHas('info', function ($query) use ($userSettings) {
-                $query->where('age', '>=', $userSettings->search_age_from)
-                    ->where('age', '<=', $userSettings->search_age_to)
-                    ->where('gender', 'male')
-                    ->where('user_id', '!=', $userSettings->user_id);
-            })
-                ->whereDoesntHave('userLiked', function ($query) use ($user) {
-                    $query->where('user_one', $user->id);
-                })
-                ->whereDoesntHave('dislikes', function ($query) use ($user) {
-                    $query->where('user_one', $user->id);
-                })
-                ->paginate(1);
+            $users = User::searchWithSettings(
+                $userSettings->search_age_from,
+                $userSettings->search_age_to,
+                'male',
+                $userSettings->user_id
+            )
+                ->searchWithoutLikesAndDislikes($id)
+                ->first();
         }
 
         return view('home', [
-            'users' => $users,
+            'otherUser' => $users,
             'user' => $user,
         ]);
     }

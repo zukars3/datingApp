@@ -45,6 +45,11 @@ class User extends Authenticatable
         return $this->hasOne('App\UserSettings');
     }
 
+    public function pictures()
+    {
+        return $this->hasMany('App\Picture');
+    }
+
     public function userLiked()
     {
         return $this->belongsToMany('App\User', 'matches', 'user_two', 'user_one');
@@ -77,5 +82,56 @@ class User extends Authenticatable
     public function dislikes()
     {
         return $this->belongsToMany('App\User', 'dislikes', 'user_two', 'user_one');
+    }
+
+    public function scopeSearchWithSettings($query, $from, $to, $gender, $id)
+    {
+        if ($gender == 'both') {
+            return $query->whereHas('info', function ($query) use ($from, $to, $id) {
+                $query->where('age', '>=', $from)
+                    ->where('age', '<=', $to)
+                    ->where('user_id', '!=', $id);
+            });
+        } else {
+            return $query->whereHas('info', function ($query) use ($from, $to, $gender, $id) {
+                $query->where('age', '>=', $from)
+                    ->where('age', '<=', $to)
+                    ->where('gender', $gender)
+                    ->where('user_id', '!=', $id);
+            });
+        }
+    }
+
+    public function scopeSearchWithoutLikesAndDislikes($query, $id)
+    {
+        return $query->whereDoesntHave('userLiked', function ($query) use ($id) {
+            $query->where('user_one', $id);
+        })
+            ->whereDoesntHave('dislikes', function ($query) use ($id) {
+                $query->where('user_one', $id);
+            });
+    }
+
+    public function scopeSearchMatches($query, $id)
+    {
+        return $query->whereHas('userLiked', function ($query) use ($id) {
+            $query->where('user_one', $id);
+        })
+            ->whereHas('likedUser', function ($query) use ($id) {
+                $query->where('user_two', $id);
+            })
+            ->whereDoesntHave('dislikes', function ($query) use ($id) {
+                $query->where('user_one', $id);
+            });
+    }
+
+    public function scopeSearchLikes($query, $id)
+    {
+        return $query->whereHas('userLiked', function ($query) use ($id) {
+            $query->where('user_one', $id);
+        })
+            ->whereDoesntHave('dislikes', function ($query) use ($id) {
+                $query->where('user_one', $id);
+            });
     }
 }
