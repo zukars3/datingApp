@@ -21,6 +21,7 @@
                     @else
                         <div class="card-header">
                             Edit your profile
+                            <a href="{{ route('user.show', $user->id) }}">Preview my profile</a>
                         </div>
                     @endif
 

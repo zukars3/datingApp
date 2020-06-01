@@ -32,7 +32,9 @@ $factory->define(User::class, function (Faker $faker) {
 $factory->define(UserInfo::class, function (Faker $faker) {
     $gender = $faker->randomElement(['male', 'female']);
 
-    if($gender == 'male') {
+    if ($gender == 'male') {
+        $firstName = $faker->firstName('male');
+
         $pictures = [
             'picture/male/male1.jpeg',
             'picture/male/male2.jpeg',
@@ -46,6 +48,8 @@ $factory->define(UserInfo::class, function (Faker $faker) {
             'picture/male/male10.jpeg'
         ];
     } else {
+        $firstName = $faker->firstName('female');
+
         $pictures = [
             'picture/female/female1.jpeg',
             'picture/female/female2.jpeg',
@@ -76,7 +80,7 @@ $factory->define(UserInfo::class, function (Faker $faker) {
     }
 
     return [
-        'name' => $faker->firstName,
+        'name' => $firstName,
         'surname' => $faker->lastName,
         'age' => $faker->numberBetween(18, 100),
         'gender' => $gender,
