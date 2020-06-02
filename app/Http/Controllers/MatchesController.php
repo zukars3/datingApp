@@ -17,13 +17,7 @@ class MatchesController extends Controller
         $userSettings = $user->settings;
         $id = $user->id;
 
-        $users = User::searchWithSettings(
-            $userSettings->search_age_from,
-            $userSettings->search_age_to,
-            'both',
-            $userSettings->user_id
-        )
-            ->searchMatches($id)
+        $users = User::searchMatches($id)
             ->get();
 
         return view('matches', [
@@ -38,13 +32,7 @@ class MatchesController extends Controller
         $userSettings = $user->settings;
         $id = $user->id;
 
-        $users = User::searchWithSettings(
-            $userSettings->search_age_from,
-            $userSettings->search_age_to,
-            'both',
-            $userSettings->user_id
-        )
-            ->searchLikes($id)
+        $users = User::searchLikes($id)
             ->get();
 
         return view('likes', [

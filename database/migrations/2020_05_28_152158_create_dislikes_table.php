@@ -15,8 +15,10 @@ class CreateDislikesTable extends Migration
     {
         Schema::create('dislikes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('user_one');
-            $table->unsignedInteger('user_two');
+            $table->unsignedBigInteger('user_one');
+            $table->unsignedBigInteger('user_two');
+            $table->foreign('user_one')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_two')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

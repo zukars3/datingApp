@@ -12,6 +12,17 @@ class Picture extends Model
         'path'
     ];
 
+    public static function boot(): void
+    {
+        parent::boot();
+
+        static::deleting(function (Picture $picture) {
+            Storage::delete([
+                Storage::disk('public')->delete($picture->path),
+            ]);
+        });
+    }
+
     public function getPicture()
     {
         if($this->path == null)

@@ -52,18 +52,23 @@
                             </li>
                         @endif
                     @else
-                        <li class="nav-item">
+                        <!--<li class="nav-item">
                             <a class="nav-link" href="{{ route('likes') }}">
                                 {{ __('My Likes') }}
                             </a>
-                        </li>
+                        </li>-->
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('matches') }}">
-                                {{ __('My Matches') }}
+                                {{ __('Matches') }}
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('profile') }}">
+                            <a class="nav-link" href="{{ route('pictures.show') }}">
+                                {{ __('My Pictures') }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('profile.showEditProfile') }}">
                                 {{ __('Profile') }}
                             </a>
                         </li>

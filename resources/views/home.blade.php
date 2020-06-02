@@ -8,6 +8,12 @@
                 <div class="col-8 offset-2 text-center" id="no_picture">
                     <h1>Please complete your profile by adding a profile picture!</h1>
                 </div>
+            @elseif($pictures == null)
+                <div class="col-8 offset-2 text-center" id="no_picture">
+                    <h1>There is nobody to show :(</h1>
+                    <br>
+                    <h2>Try adjusting your search settings</h2>
+                </div>
             @else
                 <div class="row justify-content-center">
                     <div class="col-6 text-right">
@@ -86,6 +92,7 @@
         width: 100%;
         max-height: 100%;
         border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
 
     #description {

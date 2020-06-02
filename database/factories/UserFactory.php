@@ -82,6 +82,7 @@ $factory->define(UserInfo::class, function (Faker $faker) {
     return [
         'name' => $firstName,
         'surname' => $faker->lastName,
+        'phone' => $faker->numberBetween(10000000, 99999999),
         'age' => $faker->numberBetween(18, 100),
         'gender' => $gender,
         'profile_picture' => $faker->randomElement($pictures),

@@ -9,6 +9,15 @@
 @section('content')
 
     <div class="container">
+
+        <form action="{{ route('profile.destroy') }}" method="post">
+            @csrf
+            @method('delete')
+
+            <button type="submit" class="btn btn-danger">Delete profile</button>
+        </form>
+
+
         <div class="container mt-5">
             @if (session('status'))
                 <div class="alert alert-success" role="alert">
@@ -22,7 +31,7 @@
                             <div class="author-card-avatar">
                                 <img src="{{ $userInfo->getPicture() }}"
                                      id="profile_picture"
-                                     alt="Picture of you">
+                                     alt="Picture of you" style="width: 100%">
                                 <div class="text-center upload">
                                     <form action="{{ route('profile.updateProfilePicture') }}"
                                           enctype="multipart/form-data" method="post">
@@ -49,66 +58,63 @@
                     </div>
                     <div class="wizard">
                         <nav class="list-group list-group-flush">
-                            <a class="list-group-item active" href="{{ route('profile.updateProfile') }}">Edit
-                                Profile</a>
-                            <a class="list-group-item" href="{{ route('profile.updateSettings') }}">Edit Settings</a>
+                            <a class="list-group-item" href="{{ route('profile.updateProfile') }}">Edit Profile</a>
+                            <a class="list-group-item active" href="{{ route('profile.updateSettings') }}">Edit
+                                Settings</a>
                         </nav>
                     </div>
                 </div>
 
-                <div class="col-lg-8 pb-5">
-                    <form class="row" method='post' action="{{ route('profile.updateProfile') }}">
+                <div class="col-lg-8 pb-5 settings">
+                    <form method='post' action="{{ route('profile.updateSettings') }}">
                         @csrf
+                        @method('put')
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input class="form-control" type="text" name="name" id="name"
-                                       value="{{ $userInfo->name }}"
-                                       required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="surname">Surname</label>
-                                <input class="form-control" type="text" name="surname" id="surname"
-                                       value="{{ $userInfo->surname }}"
-                                       required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="email">E-mail</label>
-                                <input class="form-control" type="email" name="email" id="email"
-                                       value="{{ $user->email }}" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="phone">Phone Number</label>
-                                <input class="form-control" type="text" name="phone" id="phone"
-                                       value="{{ $userInfo->phone }}"
-                                       required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="age">Age</label>
-                                <input type="text" class="js-range-slider" name="age" id="age" value=""
-                                       data-type="single"
+                        <div class="form-group row">
+                            <label for="search_age_range"
+                                   class="col-md-4 col-form-label text-md-right">{{ __('Age range') }}</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="js-range-slider"
+                                       name="search_age_range"
+                                       id="search_age_range"
+                                       value=""
+                                       data-type="double"
                                        data-min="18"
                                        data-max="100"
-                                       data-from="{{ $userInfo->age }}"
-                                       data-grid="false"
+                                       data-from="{{ $userSettings->search_age_from }}"
+                                       data-to="{{ $userSettings->search_age_to }}"
                                 />
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <label for="description">Bio</label>
-                            <textarea class="form-control" id="description" name="description" rows="3"
-                                      style="resize:none;" required
-                                      autocomplete="description">{{ $userInfo->description }}</textarea>
+
+                        <div class="form-group row">
+                            <label for="genderMale"
+                                   class="col-md-4 col-form-label text-md-right">{{ __('I am looking for') }}</label>
+
+                            <div class="col-md-6">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="search_male"
+                                           id="search_male" value="1"
+                                           @if($userSettings->search_male == 1)
+                                           checked
+                                        @endif>
+                                    <label class="form-check-label" for="search_male">Male</label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="search_female"
+                                           id="search_female" value="1"
+                                           @if($userSettings->search_female == 1)
+                                           checked
+                                        @endif
+                                    >
+                                    <label class="form-check-label" for="search_female">Female</label>
+                                </div>
+
+                            </div>
                         </div>
+
                         <div class="col-12">
                             <hr class="mt-2 mb-3">
                             <div class="d-flex flex-wrap justify-content-between align-items-center">
@@ -156,5 +162,9 @@
         width: 100%;
         border-radius: 10px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    .settings {
+        padding-top: 10%;
     }
 </style>

@@ -103,14 +103,16 @@ class User extends Authenticatable
             return $query->whereHas('info', function ($query) use ($from, $to, $id) {
                 $query->where('age', '>=', $from)
                     ->where('age', '<=', $to)
-                    ->where('user_id', '!=', $id);
+                    ->where('user_id', '!=', $id)
+                    ->where('profile_picture', '!=', '');
             });
         } else {
             return $query->whereHas('info', function ($query) use ($from, $to, $gender, $id) {
                 $query->where('age', '>=', $from)
                     ->where('age', '<=', $to)
                     ->where('gender', $gender)
-                    ->where('user_id', '!=', $id);
+                    ->where('user_id', '!=', $id)
+                    ->where('profile_picture', '!=', '');
             });
         }
     }
@@ -143,6 +145,9 @@ class User extends Authenticatable
         return $query->whereHas('userLiked', function ($query) use ($id) {
             $query->where('user_one', $id);
         })
+            ->whereDoesntHave('likedUser', function ($query) use ($id) {
+                $query->where('user_two', $id);
+            })
             ->whereDoesntHave('dislikes', function ($query) use ($id) {
                 $query->where('user_one', $id);
             });

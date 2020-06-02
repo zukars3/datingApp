@@ -21,13 +21,16 @@ class UpdateUserProfileRequest extends FormRequest
      *
      * @return array
      */
+
     public function rules()
     {
         return [
-            'picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'search_age_range' => 'required',
-            'search_male' => 'required_unless:search_female,1',
-            'search_female' => 'required_unless:search_male,1',
+            'name' => ['required', 'string', 'min:3', 'max:255'],
+            'surname' => ['required', 'string', 'min:3', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'phone' => ['required', 'string', 'min:8', 'max:8'],
+            'age' => ['required', 'int', 'min:18', 'max:100'],
+            'description' => ['required', 'min:10', 'max:500'],
         ];
     }
 }

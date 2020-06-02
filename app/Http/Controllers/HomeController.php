@@ -32,11 +32,11 @@ class HomeController extends Controller
         if ($userSettings->search_female == 1 && $userSettings->search_male == 1) {
             $otherUser = User::inRandomOrder()
                 ->searchWithSettings(
-                $userSettings->search_age_from,
-                $userSettings->search_age_to,
-                'both',
-                $userSettings->user_id
-            )
+                    $userSettings->search_age_from,
+                    $userSettings->search_age_to,
+                    'both',
+                    $userSettings->user_id
+                )
                 ->searchWithoutLikesAndDislikes($id)
                 ->first();
         } elseif ($userSettings->search_female == 1) {
@@ -52,16 +52,20 @@ class HomeController extends Controller
         } elseif ($userSettings->search_male == 1) {
             $otherUser = User::inRandomOrder()
                 ->searchWithSettings(
-                $userSettings->search_age_from,
-                $userSettings->search_age_to,
-                'male',
-                $userSettings->user_id
-            )
+                    $userSettings->search_age_from,
+                    $userSettings->search_age_to,
+                    'male',
+                    $userSettings->user_id
+                )
                 ->searchWithoutLikesAndDislikes($id)
                 ->first();
         }
 
-        $pictures = $otherUser->pictures;
+        if ($otherUser == null) {
+            $pictures = null;
+        } else {
+            $pictures = $otherUser->pictures;
+        }
 
         return view('home', [
             'otherUser' => $otherUser,
