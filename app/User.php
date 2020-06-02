@@ -35,6 +35,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /*public static function boot() {
+        parent::boot();
+
+        static::deleting(function($user) {
+            $user->info()->delete();
+            $user->settings()->delete();
+            $user->pictures()->delete();
+            $user->userLiked()->delete();
+            $user->likedUser()->delete();
+            $user->dislikes()->delete();
+        });
+    }*/
+
     public function info()
     {
         return $this->hasOne('App\UserInfo');

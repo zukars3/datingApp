@@ -30,7 +30,7 @@ class HomeController extends Controller
         $id = $user->id;
 
         if ($userSettings->search_female == 1 && $userSettings->search_male == 1) {
-            $users = User::inRandomOrder()
+            $otherUser = User::inRandomOrder()
                 ->searchWithSettings(
                 $userSettings->search_age_from,
                 $userSettings->search_age_to,
@@ -40,7 +40,7 @@ class HomeController extends Controller
                 ->searchWithoutLikesAndDislikes($id)
                 ->first();
         } elseif ($userSettings->search_female == 1) {
-            $users = User::inRandomOrder()
+            $otherUser = User::inRandomOrder()
                 ->searchWithSettings(
                     $userSettings->search_age_from,
                     $userSettings->search_age_to,
@@ -50,7 +50,7 @@ class HomeController extends Controller
                 ->searchWithoutLikesAndDislikes($id)
                 ->first();
         } elseif ($userSettings->search_male == 1) {
-            $users = User::inRandomOrder()
+            $otherUser = User::inRandomOrder()
                 ->searchWithSettings(
                 $userSettings->search_age_from,
                 $userSettings->search_age_to,
@@ -61,9 +61,12 @@ class HomeController extends Controller
                 ->first();
         }
 
+        $pictures = $otherUser->pictures;
+
         return view('home', [
-            'otherUser' => $users,
+            'otherUser' => $otherUser,
             'user' => $user,
+            'pictures' => $pictures
         ]);
     }
 }

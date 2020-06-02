@@ -98,6 +98,10 @@
 
                         </form>
 
+                            <form action="{{ route('profile.pictures') }}" method="post" enctype="multipart/form-data">
+                                @csrf<input type="file" name="picture[]" required="" multiple >
+                                <input type="submit" value="submit"></form>
+
                     </div>
                 </div>
             </div>

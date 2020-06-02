@@ -11,10 +11,34 @@
             @else
                 <div class="row justify-content-center">
                     <div class="col-6 text-right">
-                        <img src="{{ $otherUser->info->getPicture() }}"
-                             alt="Image of the person"
-                             id="profile_picture"
-                        >
+                        @if(count($pictures) == 0)
+                            <img class="d-block w-100" src="{{ $otherUser->info->getPicture() }}" alt="First slide">
+                        @else
+                            <div id="carousel" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img class="d-block w-100" src="{{ $otherUser->info->getPicture() }}"
+                                             alt="Profile picture of the user">
+                                    </div>
+                                    @foreach($pictures as $picture)
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100" src="{{ $picture->getPicture() }}"
+                                                 alt="Picture of the user">
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <a class="carousel-control-prev" href="#carousel" role="button"
+                                   data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carousel" role="button"
+                                   data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        @endif
                     </div>
                     <div class="col-6">
                         <h2>{{ $otherUser->info->name . ' ' . $otherUser->info->surname . ', ' . $otherUser->info->age }}</h2>
@@ -58,7 +82,7 @@
         padding-top: 30px;
     }
 
-    #profile_picture {
+    .col-6.text-right img {
         width: 100%;
         max-height: 100%;
         border-radius: 10px;

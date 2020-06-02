@@ -16,10 +16,12 @@ class UserController extends Controller
     {
         $user = auth()->user();
         $otherUser = UserInfo::find($id);
+        $pictures = $otherUser->user->pictures;
 
         return view('user', [
             'otherUser' => $otherUser,
             'user' => $user,
+            'pictures' => $pictures
         ]);
     }
 }
