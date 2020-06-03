@@ -52,7 +52,10 @@ class UpdateUserProfileController extends Controller
             'email' => $request->get('email'),
             'phone' => $request->get('phone'),
             'age' => $request->get('age'),
-            'description' => $request->get('description')
+            'description' => $request->get('description'),
+            'relationship' => $request->get('relationship'),
+            'country' => $request->get('country'),
+            'languages' => $request->get('languages')
         ]);
 
         return redirect()

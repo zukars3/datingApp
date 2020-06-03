@@ -62,10 +62,13 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'age' => ['required', 'int', 'min:18', 'max:100'],
             'gender' => ['required'],
-            'description' => ['required', 'min:10', 'max:500'],
+            'description' => ['required', 'min:10', 'max:255'],
+            'relationship' => ['required'],
+            'country' => ['required'],
+            'languages' => ['required', 'min:2', 'max:255'],
             'search_age_range' => ['required'],
             'search_male' => ['required_unless:search_female,1'],
-            'search_female' => ['required_unless:search_male,1'],
+            'search_female' => ['required_unless:search_male,1']
         ]);
     }
 
@@ -90,7 +93,10 @@ class RegisterController extends Controller
             'age' => $data['age'],
             'gender' => $data['gender'],
             'profile_picture' => '',
-            'description' => $data['description']
+            'description' => $data['description'],
+            'relationship' => $data['relationship'],
+            'country' => $data['country'],
+            'languages' => $data['languages']
         ]);
 
         $searchAgeRange = explode(';', $data['search_age_range']);

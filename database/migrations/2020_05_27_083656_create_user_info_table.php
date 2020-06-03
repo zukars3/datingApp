@@ -23,6 +23,9 @@ class CreateUserInfoTable extends Migration
             $table->string('gender');
             $table->string('profile_picture');
             $table->string('description');
+            $table->string('relationship');
+            $table->string('country');
+            $table->string('languages');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

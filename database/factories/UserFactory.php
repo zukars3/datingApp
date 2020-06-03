@@ -86,7 +86,31 @@ $factory->define(UserInfo::class, function (Faker $faker) {
         'age' => $faker->numberBetween(18, 100),
         'gender' => $gender,
         'profile_picture' => $faker->randomElement($pictures),
-        'description' => $faker->paragraph(2)
+        'description' => $faker->paragraph(2),
+        'relationship' => $faker->randomElement([
+            "Single",
+            "Taken",
+            "Engaged",
+            "Married",
+            "It's complicated",
+            "Free relationship"
+        ]),
+        'country' => $faker->country,
+        'languages' => $faker->randomElement([
+            'Latvian',
+            'Russian',
+            'English',
+            'Latvian and Russian',
+            'English and Russian',
+            'Spanish',
+            'English and Spanish',
+            'Russian',
+            'French',
+            'German',
+            'English and French',
+            'English and German',
+            'Latvian, English and Russian'
+        ])
     ];
 });
 

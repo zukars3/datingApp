@@ -31,6 +31,9 @@ class UpdateUserProfileRequest extends FormRequest
             'phone' => ['required', 'string', 'min:8', 'max:8'],
             'age' => ['required', 'int', 'min:18', 'max:100'],
             'description' => ['required', 'min:10', 'max:500'],
+            'relationship' => ['required'],
+            'country' => ['required'],
+            'languages' => ['required', 'min:2', 'max:255']
         ];
     }
 }

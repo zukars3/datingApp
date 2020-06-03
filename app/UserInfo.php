@@ -16,6 +16,9 @@ class UserInfo extends Model
         'gender',
         'profile_picture',
         'description',
+        'relationship',
+        'country',
+        'languages'
     ];
 
     public function user()
