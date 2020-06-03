@@ -177,7 +177,7 @@
                                 <option value="Engaged">Engaged</option>
                                 <option value="Married">Married</option>
                                 <option value="It's complicated">It's complicated</option>
-                                <option value="Free relationship">Free relationship</option>
+                                <option value="Open relationship">Open relationship</option>
                             </select>
                         </div>
                     </div>
