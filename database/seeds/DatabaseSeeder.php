@@ -32,6 +32,21 @@ class DatabaseSeeder extends Seeder
                 'user_one' => $faker->numberBetween(1, $usersCount),
                 'user_two' => $faker->numberBetween(1, $usersCount)
             ]);
+
+            DB::table('pictures')->insert([
+                'user_id' => $faker->numberBetween(1, $usersCount),
+                'path' => $faker->randomElement([
+                    'picture/rand/rand_photo_1.jpg',
+                    'picture/rand/rand_photo_3.jpg',
+                    'picture/rand/rand_photo_4.jpg',
+                    'picture/rand/rand_photo_5.png',
+                    'picture/rand/rand_photo_6.jpg',
+                    'picture/rand/rand_photo_7.jpg',
+                    'picture/rand/rand_photo_8.jpg',
+                    'picture/rand/rand_photo_9.jpg',
+                    'picture/rand/rand_photo_10.jpg'
+                ])
+            ]);
         }
     }
 }

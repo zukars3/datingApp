@@ -51,13 +51,13 @@
                         <br>
                         <div class="row">
                             <div class="col-4">
-                                <p>Country: {{ $otherUser->info->country }}</p>
+                                <h5>Country: {{ $otherUser->info->country }}</h5>
                             </div>
                             <div class="col-4">
-                                <p>Languages: {{ $otherUser->info->languages }}</p>
+                                <h5>Languages: {{ $otherUser->info->languages }}</h5>
                             </div>
                             <div class="col-4">
-                                <p>Relationship status: {{ $otherUser->info->relationship }}</p>
+                                <h5>Relationship status: {{ $otherUser->info->relationship }}</h5>
                             </div>
                         </div>
                         <br>

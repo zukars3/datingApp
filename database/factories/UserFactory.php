@@ -3,6 +3,7 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Match;
+use App\Picture;
 use App\User;
 use App\UserInfo;
 use App\UserSettings;
