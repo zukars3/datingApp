@@ -49,6 +49,18 @@
                     <div class="col-6">
                         <h2>{{ $otherUser->info->name . ' ' . $otherUser->info->surname . ', ' . $otherUser->info->age }}</h2>
                         <br>
+                        <div class="row">
+                            <div class="col-4">
+                                <p>Country: {{ $otherUser->info->country }}</p>
+                            </div>
+                            <div class="col-4">
+                                <p>Languages: {{ $otherUser->info->languages }}</p>
+                            </div>
+                            <div class="col-4">
+                                <p>Relationship status: {{ $otherUser->info->relationship }}</p>
+                            </div>
+                        </div>
+                        <br>
                         <h3>Bio:</h3>
                         <p id="description">{{ $otherUser->info->description}}</p>
                         <a href="{{ route('user.show', $otherUser->id) }}">Open profile</a>
