@@ -65,13 +65,13 @@
                         <p id="description">{{ $otherUser->info->description}}</p>
                         <a href="{{ route('user.show', $otherUser->id) }}">Open profile</a>
                         <div class="row reaction">
-
                             <div class="col-4">
                                 <form action="{{ route('like', $otherUser->id) }}" method="post">
                                     @csrf
                                     <button class="btn" type="submit"><img
-                                            src="https://img.icons8.com/cotton/64/000000/like--v3.png"
-                                            style="width: 100px" alt="Like button picture"></button>
+                                            src="/storage/picture/emoji/smiling-face-with-heart-eyes_poz.png"
+                                            alt="Like button picture"
+                                            id="like_button"></button>
                                 </form>
                             </div>
 
@@ -79,8 +79,9 @@
                                 <form action="{{ route('dislike', $otherUser->id) }}" method="post">
                                     @csrf
                                     <button class="btn" type="submit"><img
-                                            src="https://img.icons8.com/ios/100/000000/--broken-heart.png"
-                                            alt="Dislike button picture"></button>
+                                            src="/storage/picture/emoji/confounded-face_neg.png"
+                                            alt="Dislike button picture"
+                                            id="dislike_button"></button>
                                 </form>
                             </div>
                         </div>
@@ -111,7 +112,11 @@
         font-size: 18px;
     }
 
-    .reaction .btn {
+    #like_button {
+        width: 100px;
+    }
 
+    #dislike_button {
+        width: 100px;
     }
 </style>
