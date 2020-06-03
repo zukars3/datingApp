@@ -29,6 +29,8 @@ class HomeController extends Controller
         $userSettings = $user->settings;
         $id = $user->id;
 
+        $otherUser = null;
+
         if ($userSettings->search_female == 1 && $userSettings->search_male == 1) {
             $otherUser = User::inRandomOrder()
                 ->searchWithSettings(

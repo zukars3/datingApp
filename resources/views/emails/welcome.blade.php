@@ -351,7 +351,7 @@
                                                                 <!--[if !mso]><!-- --><span
                                                                     class="msohide es-button-border"
                                                                     style="border-style:solid;border-color:#1B2A2F;background:#EF0D33;border-width:0px;display:inline-block;border-radius:0px;width:auto;mso-hide:all;"><a
-                                                                        href="http://127.0.0.1:8001/profile"
+                                                                        href="http://127.0.0.1:8001/profile/edit"
                                                                         class="es-button" target="_blank"
                                                                         style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Oswald, sans-serif;font-size:12px;color:#FFFFFF;border-style:solid;border-color:#EF0D33;border-width:25px 40px 25px 40px;display:inline-block;background:#EF0D33;border-radius:0px;font-weight:bold;font-style:normal;line-height:14px;width:auto;text-align:center;">COMPLETE PROFILE</a></span>
                                                                 <!--<![endif]--></td>

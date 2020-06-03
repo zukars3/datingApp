@@ -67,14 +67,11 @@ class UpdateUserProfileController extends Controller
 
         $searchAgeRange = explode(';', $request->get('search_age_range'));
 
-        (isset($data['search_male'])) ? $searchMale = 1 : $searchMale = 0;
-        (isset($data['search_female'])) ? $searchFemale = 1 : $searchFemale = 0;
-
         $userSettings->update([
             'search_age_from' => $searchAgeRange[0],
             'search_age_to' => $searchAgeRange[1],
-            'search_male' => $searchMale,
-            'search_female' => $searchFemale
+            'search_male' => $request->get('search_male'),
+            'search_female' => $request->get('search_female')
 
         ]);
 
