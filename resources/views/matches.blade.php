@@ -2,32 +2,44 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
-            @foreach($users as $otherUser)
-                <div class="card">
-                    <div class="row justify-content-center">
-                        <div class="col-6 text-right">
-                            <img src="{{ $otherUser->info->getPicture() }}"
-                                 alt="Image of the person"
-                                 id="profile_picture"
-                            >
-                        </div>
-                        <div class="col-6">
-                            <h2>{{ $otherUser->info->name . ' ' . $otherUser->info->surname . ', ' . $otherUser->info->age }}</h2>
-                            <br>
-                            <h3>Bio:</h3>
-                            <p id="description">{{ $otherUser->info->description}}</p>
+        @if(count($users) == 0)
+            <div class="text-center empty">
+                <h2>Nothing to show here yet...</h2>
+            </div>
+        @else
+            <div class="row">
+                @foreach($users as $otherUser)
+                    <div class="card">
+                        <div class="row justify-content-center">
+                            <div class="col-6 text-right">
+                                <img src="{{ $otherUser->info->getPicture() }}"
+                                     alt="Image of the person"
+                                     id="profile_picture"
+                                >
+                            </div>
+                            <div class="col-6">
+                                <h2>{{ $otherUser->info->name . ' ' . $otherUser->info->surname . ', ' . $otherUser->info->age }}</h2>
+                                <br>
+                                <h3>Bio:</h3>
+                                <p id="description">{{ $otherUser->info->description}}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+                @endif
 
-        </div>
+            </div>
     </div>
 @endsection
 <style>
     .row.justify-content-center {
         width: 100%;
+    }
+
+    .empty {
+        margin-top: 30%;
+        color: black;
+        text-shadow: 3px 4px 3px rgba(0, 0, 0, 0.3);
     }
 
     .card {
