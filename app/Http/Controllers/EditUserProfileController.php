@@ -6,20 +6,20 @@ use App\Http\Requests\UpdateUserProfilePictureRequest;
 use App\Http\Requests\UpdateUserProfileRequest;
 use App\Http\Requests\UpdateUserSettingsRequest;
 use App\Picture;
-use App\UserInfo;
-use App\UserSettings;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 
-class UpdateUserProfileController extends Controller
+class EditUserProfileController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    public function show()
+    public function show(): View
     {
         $user = auth()->user();
 
@@ -30,7 +30,7 @@ class UpdateUserProfileController extends Controller
         ]);
     }
 
-    public function showSettings()
+    public function showSettings(): View
     {
         $user = auth()->user();
 
@@ -41,7 +41,7 @@ class UpdateUserProfileController extends Controller
         ]);
     }
 
-    public function updateProfile(UpdateUserProfileRequest $request)
+    public function updateProfile(UpdateUserProfileRequest $request): RedirectResponse
     {
         $user = auth()->user();
         $userInfo = $user->info;
@@ -63,7 +63,7 @@ class UpdateUserProfileController extends Controller
             ->with('status', 'Profile has been updated.');
     }
 
-    public function updateSettings(UpdateUserSettingsRequest $request)
+    public function updateSettings(UpdateUserSettingsRequest $request): RedirectResponse
     {
         $user = auth()->user();
         $userSettings = $user->settings;
@@ -83,7 +83,7 @@ class UpdateUserProfileController extends Controller
             ->with('status', 'Settings have been updated.');
     }
 
-    public function updateProfilePicture(UpdateUserProfilePictureRequest $request)
+    public function updateProfilePicture(UpdateUserProfilePictureRequest $request): RedirectResponse
     {
         $user = auth()->user();
         $userInfo = $user->info;
@@ -99,7 +99,7 @@ class UpdateUserProfileController extends Controller
             ->with('status', 'Profile has been updated.');
     }
 
-    public function showPictures()
+    public function showPictures(): View
     {
         $user = auth()->user();
         $pictures = $user->pictures;
@@ -110,7 +110,7 @@ class UpdateUserProfileController extends Controller
         ]);
     }
 
-    public function addPictures(Request $request)
+    public function addPictures(Request $request): RedirectResponse
     {
         $user = auth()->user();
 
@@ -130,7 +130,7 @@ class UpdateUserProfileController extends Controller
             ->with('status', 'Profile update failed.');
     }
 
-    public function destroyPicture(int $id)
+    public function destroyPicture(int $id): RedirectResponse
     {
         $picture = Picture::find($id);
         $picture->delete();
@@ -138,7 +138,7 @@ class UpdateUserProfileController extends Controller
         return redirect()->back();
     }
 
-    public function destroyProfile()
+    public function destroyProfile(): RedirectResponse
     {
         $user = Auth::user();
 

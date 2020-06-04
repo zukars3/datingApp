@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateUserProfilePictureRequest extends FormRequest
+class AddUserPicturesRequest extends FormRequest
 {
     public function authorize()
     {
@@ -14,7 +14,8 @@ class UpdateUserProfilePictureRequest extends FormRequest
     public function rules()
     {
         return [
-            'picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            "picture" => "required|array|min:1",
+            "picture.*" => "image|mimes:jpeg,png,jpg,gif,svg|max:2048"
         ];
     }
 }

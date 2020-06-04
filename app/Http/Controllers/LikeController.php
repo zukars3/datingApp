@@ -2,14 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Dislike;
-use App\Mail\SendMatchedEmail;
-use App\Mail\SendWelcomeEmail;
-use App\Match;
 use App\Services\ReactionService;
 use App\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\RedirectResponse;
 
 class LikeController extends Controller
 {
@@ -21,7 +16,7 @@ class LikeController extends Controller
         $this->reactionService = $reactionService;
     }
 
-    public function like(int $id)
+    public function like(int $id): RedirectResponse
     {
         $user = auth()->user();
         $otherUser = User::find($id);
@@ -31,7 +26,7 @@ class LikeController extends Controller
         return redirect(route('home'));
     }
 
-    public function dislike(int $id)
+    public function dislike(int $id): RedirectResponse
     {
         $user = auth()->user();
         $otherUser = User::find($id);

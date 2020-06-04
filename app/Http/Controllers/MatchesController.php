@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Illuminate\View\View;
 
 class MatchesController extends Controller
 {
@@ -11,7 +12,7 @@ class MatchesController extends Controller
         $this->middleware('auth');
     }
 
-    public function matches()
+    public function matches(): View
     {
         $user = auth()->user();
         $id = $user->id;
