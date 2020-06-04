@@ -6,15 +6,19 @@ use App\Dislike;
 use App\Mail\SendMatchedEmail;
 use App\Mail\SendWelcomeEmail;
 use App\Match;
+use App\Services\ReactionService;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class LikeController extends Controller
 {
-    public function __construct()
+    private ReactionService $reactionService;
+
+    public function __construct(ReactionService $reactionService)
     {
         $this->middleware('auth');
+        $this->reactionService = $reactionService;
     }
 
     public function like(int $id)
@@ -22,17 +26,7 @@ class LikeController extends Controller
         $user = auth()->user();
         $otherUser = User::find($id);
 
-        Match::create([
-            'user_one' => $user->id,
-            'user_two' => $id
-        ]);
-
-        if (!$user->match($otherUser) == null) {
-            Mail::to($user->email)
-                ->queue(new SendMatchedEmail($user, $otherUser));
-            Mail::to($otherUser->email)
-                ->queue(new SendMatchedEmail($otherUser, $user));
-        }
+        $this->reactionService->like($user, $otherUser);
 
         return redirect(route('home'));
     }
@@ -40,11 +34,9 @@ class LikeController extends Controller
     public function dislike(int $id)
     {
         $user = auth()->user();
+        $otherUser = User::find($id);
 
-        Dislike::create([
-            'user_one' => $user->id,
-            'user_two' => $id
-        ]);
+        $this->reactionService->dislike($user, $otherUser);
 
         return redirect(route('home'));
     }
