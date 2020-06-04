@@ -99,45 +99,6 @@ class EditUserProfileController extends Controller
             ->with('status', 'Profile has been updated.');
     }
 
-    public function showPictures(): View
-    {
-        $user = auth()->user();
-        $pictures = $user->pictures;
-
-        return view('pictures', [
-            'user' => $user,
-            'pictures' => $pictures
-        ]);
-    }
-
-    public function addPictures(Request $request): RedirectResponse
-    {
-        $user = auth()->user();
-
-        if ($request->hasFile('picture')) {
-            foreach ($request->file('picture') as $picture) {
-                Picture::create([
-                    'user_id' => $user->id,
-                    'path' => $picture->store('profilePictures', 'public')
-                ]);
-            }
-            return redirect()
-                ->back()
-                ->with('status', 'Profile has been updated.');
-        }
-        return redirect()
-            ->back()
-            ->with('status', 'Profile update failed.');
-    }
-
-    public function destroyPicture(int $id): RedirectResponse
-    {
-        $picture = Picture::find($id);
-        $picture->delete();
-
-        return redirect()->back();
-    }
-
     public function destroyProfile(): RedirectResponse
     {
         $user = Auth::user();
