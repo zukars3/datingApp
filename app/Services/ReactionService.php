@@ -6,7 +6,6 @@ use App\Dislike;
 use App\Mail\SendMatchedEmail;
 use App\Match;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Storage;
 
 class ReactionService
 {

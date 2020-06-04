@@ -1,6 +1,5 @@
 <?php
 
-use App\Match;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use App\UserInfo;

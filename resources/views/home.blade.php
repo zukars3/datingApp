@@ -63,7 +63,6 @@
                         <br>
                         <h3>Bio:</h3>
                         <p id="description">{{ $otherUser->info->description}}</p>
-                        <a href="{{ route('user.show', $otherUser->id) }}">Open profile</a>
                         <div class="row reaction">
                             <div class="col-4">
                                 <form action="{{ route('like', $otherUser->id) }}" method="post">

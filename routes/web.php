@@ -1,19 +1,7 @@
 <?php
 
-use App\Jobs\ExampleJob;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome');
@@ -36,10 +24,5 @@ Route::get('/profile/settings', 'EditUserProfileController@showSettings')->name(
 Route::put('/profile/settings', 'EditUserProfileController@updateSettings')->name('profile.updateSettings');
 
 Route::delete('/profile', 'EditUserProfileController@destroyProfile')->name('profile.destroy');
-Route::get('/profile/{id}', 'UserController@show')->name('user.show');
-Route::post('/profile/like/{id}', 'LikeController@like')->name('like');
-Route::post('/profile/dislike/{id}', 'LikeController@dislike')->name('dislike');
-
-Route::get('/test', function () {
-    ExampleJob::dispatch(100);
-});
+Route::post('/profile/like/{id}', 'ReactionController@like')->name('like');
+Route::post('/profile/dislike/{id}', 'ReactionController@dislike')->name('dislike');

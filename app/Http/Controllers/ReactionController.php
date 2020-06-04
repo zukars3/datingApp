@@ -6,7 +6,7 @@ use App\Services\ReactionService;
 use App\User;
 use Illuminate\Http\RedirectResponse;
 
-class LikeController extends Controller
+class ReactionController extends Controller
 {
     private ReactionService $reactionService;
 
