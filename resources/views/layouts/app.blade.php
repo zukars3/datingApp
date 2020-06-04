@@ -52,11 +52,6 @@
                             </li>
                         @endif
                     @else
-                        <!--<li class="nav-item">
-                            <a class="nav-link" href="{{ route('likes') }}">
-                                {{ __('My Likes') }}
-                            </a>
-                        </li>-->
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('matches') }}">
                                 {{ __('Matches') }}

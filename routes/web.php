@@ -23,7 +23,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/matches', 'MatchesController@matches')->name('matches');
-Route::get('/likes', 'MatchesController@likes')->name('likes');
 
 Route::get('/pictures', 'UpdateUserProfileController@showPictures')->name('pictures.show');
 Route::post('/pictures', 'UpdateUserProfileController@addPictures')->name('pictures.add');

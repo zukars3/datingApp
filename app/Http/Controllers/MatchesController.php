@@ -25,19 +25,4 @@ class MatchesController extends Controller
             'user' => $user,
         ]);
     }
-
-    public function likes()
-    {
-        $user = auth()->user();
-        $userSettings = $user->settings;
-        $id = $user->id;
-
-        $users = User::searchLikes($id)
-            ->get();
-
-        return view('likes', [
-            'users' => $users,
-            'user' => $user,
-        ]);
-    }
 }
