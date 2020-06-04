@@ -14,7 +14,6 @@ class MatchesController extends Controller
     public function matches()
     {
         $user = auth()->user();
-        $userSettings = $user->settings;
         $id = $user->id;
 
         $users = User::searchMatches($id)
