@@ -10,14 +10,6 @@
 
     <div class="container">
 
-        <form action="{{ route('profile.destroy') }}" method="post">
-            @csrf
-            @method('delete')
-
-            <button type="submit" class="btn btn-danger">Delete profile</button>
-        </form>
-
-
         <div class="container mt-5">
             @if (session('status'))
                 <div class="alert alert-success" role="alert">
@@ -51,16 +43,23 @@
                                 </div>
                             </div>
                             <div class="author-card-details">
-                                <h5 class="author-card-name text-lg">{{ $userInfo->name . ' ' . $userInfo->surname }}</h5>
-                                <span class="author-card-position">Joined {{ $user->created_at }}</span>
+                                <h5 id="full-name" class="author-card-name text-lg">{{ $userInfo->name . ' ' . $userInfo->surname }}</h5>
+                                <h6 id="joined" class="author-card-position">Joined {{ $user->created_at }}</h6>
                             </div>
                         </div>
                     </div>
                     <div class="wizard">
                         <nav class="list-group list-group-flush">
-                            <a class="list-group-item" href="{{ route('profile.updateProfile') }}">Edit Profile</a>
-                            <a class="list-group-item active" href="{{ route('profile.updateSettings') }}">Edit
+                            <a id="inactive" class="list-group-item" href="{{ route('profile.updateProfile') }}">Edit
+                                Profile</a>
+                            <a id="active" class="list-group-item active" href="{{ route('profile.updateSettings') }}">Edit
                                 Settings</a>
+                            <form id="destroy" action="{{ route('profile.destroy') }}" method="post">
+                                @csrf
+                                @method('delete')
+
+                                <a id="delete" class="list-group-item" href="javascript:$('#destroy').submit();">Delete Profile</a>
+                            </form>
                         </nav>
                     </div>
                 </div>
@@ -118,7 +117,7 @@
                         <div class="col-12">
                             <hr class="mt-2 mb-3">
                             <div class="d-flex flex-wrap justify-content-between align-items-center">
-                                <button type="submit" class="btn btn-primary">Update</button>
+                                <button type="submit" id="update-button" class="btn btn-primary">Update</button>
                             </div>
                         </div>
                     </form>
@@ -164,7 +163,42 @@
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
 
+    #full-name {
+        font-weight: bold;
+        text-align: center;
+    }
+
+    #joined {
+        font-style: italic;
+        text-align: center;
+    }
+
     .settings {
         padding-top: 10%;
+    }
+
+    .list-group {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    #active {
+        background: #212529;
+        border: none;
+    }
+
+    #inactive {
+        color: #212529;
+    }
+
+    #delete {
+        background: red;
+        color: white;
+        margin-bottom: -14px;
+    }
+
+    #update-button {
+        background: #212529;
+        border: none;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
 </style>

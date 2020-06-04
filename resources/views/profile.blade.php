@@ -42,16 +42,24 @@
                                 </div>
                             </div>
                             <div class="author-card-details">
-                                <h5 class="author-card-name text-lg">{{ $userInfo->name . ' ' . $userInfo->surname }}</h5>
-                                <span class="author-card-position">Joined {{ $user->created_at }}</span>
+                                <h5 id="full-name" class="author-card-name text-lg">{{ $userInfo->name . ' ' . $userInfo->surname }}</h5>
+                                <h6 id="joined" class="author-card-position">Joined {{ $user->created_at }}</h6>
                             </div>
                         </div>
                     </div>
                     <div class="wizard">
                         <nav class="list-group list-group-flush">
-                            <a class="list-group-item active" href="{{ route('profile.updateProfile') }}">Edit
+                            <a id="active" class="list-group-item active" href="{{ route('profile.updateProfile') }}">Edit
                                 Profile</a>
-                            <a class="list-group-item" href="{{ route('profile.updateSettings') }}">Edit Settings</a>
+                            <a id="inactive" class="list-group-item" href="{{ route('profile.updateSettings') }}">Edit
+                                Settings</a>
+                            <form action="{{ route('profile.destroy') }}" method="post">
+                                @csrf
+                                @method('delete')
+
+                                <a id="delete" class="list-group-item" href="javascript:$('form').submit()">Delete
+                                    Profile</a>
+                            </form>
                         </nav>
                     </div>
                 </div>
@@ -377,18 +385,18 @@
                                 <option value="Zimbabwe">Zimbabwe</option>
                             </select>
                         </div>
-                            <div class="col-md-6">
-                                <label for="languages">Languages:</label>
-                                    <textarea class="form-control" id="languages" name="languages" rows="2"
-                                              style="resize:none;" required
-                                              autocomplete="languages">{{ $userInfo->languages }}</textarea>
+                        <div class="col-md-6">
+                            <label for="languages">Languages:</label>
+                            <textarea class="form-control" id="languages" name="languages" rows="2"
+                                      style="resize:none;" required
+                                      autocomplete="languages">{{ $userInfo->languages }}</textarea>
+                        </div>
+                        <div class="col-12">
+                            <hr class="mt-2 mb-3">
+                            <div class="d-flex flex-wrap justify-content-between align-items-center">
+                                <button type="submit" id="update-button" class="btn btn-primary">Update</button>
                             </div>
-                            <div class="col-12">
-                                <hr class="mt-2 mb-3">
-                                <div class="d-flex flex-wrap justify-content-between align-items-center">
-                                    <button type="submit" class="btn btn-primary">Update</button>
-                                </div>
-                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -429,6 +437,41 @@
     #profile_picture {
         width: 100%;
         border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    #full-name {
+        font-weight: bold;
+        text-align: center;
+    }
+
+    #joined {
+        font-style: italic;
+        text-align: center;
+    }
+
+    .list-group {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    #active {
+        background: #212529;
+        border: none;
+    }
+
+    #inactive {
+        color: #212529;
+    }
+
+    #delete {
+        background: red;
+        color: white;
+        margin-bottom: -14px;
+    }
+
+    #update-button {
+        background: #212529;
+        border: none;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
 </style>
