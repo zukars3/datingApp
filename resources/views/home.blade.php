@@ -69,7 +69,7 @@
                                 <form action="{{ route('like', $otherUser->id) }}" method="post">
                                     @csrf
                                     <button class="btn" type="submit"><img
-                                            src="/storage/picture/emoji/smiling-face-with-heart-eyes_poz.png"
+                                            src="{{ $likeEmoji }}"
                                             alt="Like button picture"
                                             id="like_button"></button>
                                 </form>
@@ -79,7 +79,7 @@
                                 <form action="{{ route('dislike', $otherUser->id) }}" method="post">
                                     @csrf
                                     <button class="btn" type="submit"><img
-                                            src="/storage/picture/emoji/confounded-face_neg.png"
+                                            src="{{ $dislikeEmoji }}"
                                             alt="Dislike button picture"
                                             id="dislike_button"></button>
                                 </form>

@@ -2,27 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\EmojiService;
 use App\User;
 use App\UserInfo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    private $emojiService;
+
+    public function __construct(EmojiService $emojiService)
     {
         $this->middleware('auth');
+        $this->emojiService = $emojiService;
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
         $user = auth()->user();
@@ -72,7 +67,9 @@ class HomeController extends Controller
         return view('home', [
             'otherUser' => $otherUser,
             'user' => $user,
-            'pictures' => $pictures
+            'pictures' => $pictures,
+            'likeEmoji' => $this->emojiService->getPositiveEmojiUrl(),
+            'dislikeEmoji' => $this->emojiService->getNegativeEmojiUrl()
         ]);
     }
 }

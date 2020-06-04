@@ -10,11 +10,6 @@ use Faker\Generator as Faker;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
     public function run(Faker $faker)
     {
         factory(User::class, 500)->create()->each(function ($user) {
