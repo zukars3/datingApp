@@ -20,8 +20,22 @@
                             <div class="col-6">
                                 <h2>{{ $otherUser->info->name . ' ' . $otherUser->info->surname . ', ' . $otherUser->info->age }}</h2>
                                 <br>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <h5>Country: {{ $otherUser->info->country }}</h5>
+                                    </div>
+                                    <div class="col-4">
+                                        <h5>Languages: {{ $otherUser->info->languages }}</h5>
+                                    </div>
+                                    <div class="col-4">
+                                        <h5>Relationship status: {{ $otherUser->info->relationship }}</h5>
+                                    </div>
+                                </div>
+                                <br>
                                 <h3>Bio:</h3>
                                 <p id="description">{{ $otherUser->info->description}}</p>
+                                <p>e-mail: {{ $otherUser->email }}</p>
+                                <p>phone number: {{ $otherUser->info->phone }}</p>
                             </div>
                         </div>
                     </div>
