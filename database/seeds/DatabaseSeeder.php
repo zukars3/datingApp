@@ -1,6 +1,7 @@
 <?php
 
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\UserInfo;
 use App\UserSettings;
@@ -24,7 +25,9 @@ class DatabaseSeeder extends Seeder
         for ($i = 0; $i < 500; $i++) {
             DB::table('matches')->insert([
                 'user_one' => $faker->numberBetween(1, $usersCount),
-                'user_two' => $faker->numberBetween(1, $usersCount)
+                'user_two' => $faker->numberBetween(1, $usersCount),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ]);
 
             DB::table('pictures')->insert([
