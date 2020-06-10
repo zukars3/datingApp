@@ -1,4 +1,4 @@
-#Dating App
+# Dating App
 
 ![gif image showing usage](/datingApp.gif)
 
