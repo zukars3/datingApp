@@ -1,3 +1,7 @@
+#Dating App
+
+![gif image showing usage](/datingApp.gif)
+
 ##### Change database and other settings in .env.example and rename it to .env
 ##### Please run following commands:
 ###### composer install
